@@ -2,7 +2,27 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+
+import firebase from "firebase/app";
+import "firebase/analytics";
+import "firebase/auth";
+import "firebase/firestore";
+
 import reportWebVitals from './reportWebVitals';
+
+var firebaseConfig = {
+  apiKey: "AIzaSyAchFtxkxZCYz_I21hL-WKj-YaJNrlvu-k",
+  authDomain: "fir-practice-7247f.firebaseapp.com",
+  projectId: "fir-practice-7247f",
+  storageBucket: "fir-practice-7247f.appspot.com",
+  messagingSenderId: "328641255783",
+  appId: "1:328641255783:web:9963c333f4a2d31df2b7c2",
+  measurementId: "G-GR20NQDB74"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
+
 
 ReactDOM.render(
   <React.StrictMode>
