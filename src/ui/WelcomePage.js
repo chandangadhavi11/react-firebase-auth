@@ -12,6 +12,7 @@ const useFetch = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false)
 
+
     useEffect(() => {
         const db = firebase.firestore()
 
@@ -35,7 +36,8 @@ const useFetch = () => {
 const WelcomePage = () => {
 
     const {data, loading, error} = useFetch();
-
+    const user = getCurrentUser();
+    const emailVerified = user.emailVerified
 
     const history = useHistory();
     const onSignOutButtonClicked = async () => {
@@ -50,7 +52,14 @@ const WelcomePage = () => {
         return (
             <div>
                 <h1 style={{color:"#000"}}>Loading...</h1>
-
+            </div>
+        )
+    }
+    if(!emailVerified){
+        return(
+            <div>
+                <h1>Email Verification is done yet. So please check your email</h1>
+                <p>If already done then refresh the page</p>
             </div>
         )
     }

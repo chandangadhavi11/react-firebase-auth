@@ -1,11 +1,21 @@
 import firebase from 'firebase/app'
 import "firebase/firestore"
+import { getCurrentUser } from "./getCurrentUser"
 
 export const registerUser = async (email, password, firstName, lastName) => {
     
     try {
         const result = await firebase.auth().createUserWithEmailAndPassword(email, password);
         const db = firebase.firestore()
+
+        
+        var user = getCurrentUser();
+        user.sendEmailVerification().then(()=> {
+            console.log("Email Verification Done!");
+        }).catch((error)=> {
+            console.log(error);
+        })
+
         db.collection("users").doc(`${result.user.uid}`).set({
             firstName: `${firstName}`,
             lastName: `${lastName}`,
@@ -17,10 +27,15 @@ export const registerUser = async (email, password, firstName, lastName) => {
             console.error("Error writing document: ", error);
         });
         
+        
+          
+
         return {};
     } catch (error) {
-        throw new Error("Error Signing In")
+        throw new Error(error.message)
     }
     
+
+
 
 }

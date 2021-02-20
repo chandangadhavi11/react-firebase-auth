@@ -13,6 +13,7 @@ export const signInWithGoogle = async () => {
     db.collection("users").doc(`${oAuth.user.uid}`).set({
         firstName: `${oAuthFirstName}`,
         lastName: `${oAuthLastName}`,
+        emailVerification: true
     })
     .catch((error) => {
         console.error("Error writing document: ", error);
